@@ -3,25 +3,13 @@ package com.example.movieservice.model;
 public class Movie {
     private Long id;
     private String name;
-    private Enum<Category> category;
+    private Category category;
 
-    public Movie(String name) {
+
+    public Movie(String name, Category category) {
         this.name = name;
-    }
-
-    public Movie(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Movie(Enum<Category> category) {
         this.category = category;
     }
-//    public Movie(Long id, String name, Enum<Category> category) {
-//        this.id = id;
-//        this.name = name;
-//        this.category = category;
-//    }
 
     public Long getId() {
         return id;
@@ -39,11 +27,11 @@ public class Movie {
         this.name = name;
     }
 
-    public Enum<Category> getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(Enum<Category> category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 }

@@ -37,6 +37,7 @@ public class MovieService {
         Movie result = getMovieById(id);
         if (result != null) {
             result.setName(movie.getName());
+            result.setCategory(movie.getCategory());
         }
         return result;
     }
