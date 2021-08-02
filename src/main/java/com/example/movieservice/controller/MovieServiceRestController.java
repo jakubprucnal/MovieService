@@ -59,4 +59,10 @@ public class MovieServiceRestController {
         else
             return ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/{id}/available")
+    public ResponseEntity<Void> updateAvailable(@PathVariable Long id){
+        movieService.updateAvailable(id);
+        return ResponseEntity.ok().build();
+    }
 }

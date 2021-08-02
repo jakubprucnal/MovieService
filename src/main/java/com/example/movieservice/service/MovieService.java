@@ -4,10 +4,7 @@ import com.example.movieservice.model.Movie;
 import com.example.movieservice.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.OptionalLong;
 
 @Service
 public class MovieService {
@@ -48,5 +45,13 @@ public class MovieService {
         if (result)
             movieRepository.deleteById(id);
         return result;
+    }
+
+    public void updateAvailable(Long id) {
+        Movie result = getMovieById(id);
+        if (result != null){
+            result.setAvailable(true);
+            movieRepository.save(result);
+        }
     }
 }

@@ -10,6 +10,8 @@ public class Movie {
     private String name;
     @Enumerated(EnumType.STRING)
     private Category category;
+    @Column(nullable = false, columnDefinition = "bit default false")
+    private Boolean isAvailable = false;
 
 
     public Movie() {
@@ -18,6 +20,20 @@ public class Movie {
     public Movie(String name, Category category) {
         this.name = name;
         this.category = category;
+    }
+
+    public Movie(String name, Category category, Boolean isAvailable) {
+        this.name = name;
+        this.category = category;
+        this.isAvailable = isAvailable;
+    }
+
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
     }
 
     public Long getId() {
