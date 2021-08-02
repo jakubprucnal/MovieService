@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class MovieService {
 
-     private final MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
 //    public List<Movie> db = new ArrayList<>();
 
@@ -47,11 +47,11 @@ public class MovieService {
         return result;
     }
 
-    public void updateAvailable(Long id) {
-        Movie result = getMovieById(id);
-        if (result != null){
-            result.setAvailable(true);
-            movieRepository.save(result);
-        }
+    public void returnMovie(Long id) {
+        movieRepository.updateMovieAvailability(true, id);
+    }
+
+    public void rentMovie(Long id) {
+        movieRepository.updateMovieAvailability(false, id);
     }
 }
