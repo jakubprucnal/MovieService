@@ -25,8 +25,7 @@ public class MovieService {
     }
 
     public Movie getMovieById(Long id) {
-        Optional<Movie> result = movieRepository.findById(id);
-        return result.get();
+        return movieRepository.findById(id).orElse(null);
     }
 
     public void saveMovie(Movie movie) {
@@ -39,8 +38,8 @@ public class MovieService {
         if (result != null) {
             result.setName(movie.getName());
             result.setCategory(movie.getCategory());
+            movieRepository.save(result);
         }
-        movieRepository.save(result);
         return result;
     }
 
