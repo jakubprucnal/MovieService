@@ -1,10 +1,19 @@
 package com.example.movieservice.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Enumerated(EnumType.STRING)
     private Category category;
 
+
+    public Movie() {
+    }
 
     public Movie(String name, Category category) {
         this.name = name;

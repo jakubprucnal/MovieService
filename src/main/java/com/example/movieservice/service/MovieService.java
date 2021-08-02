@@ -1,6 +1,7 @@
 package com.example.movieservice.service;
 
 import com.example.movieservice.model.Movie;
+import com.example.movieservice.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,26 +12,26 @@ import java.util.OptionalLong;
 @Service
 public class MovieService {
 
-    public List<Movie> db = new ArrayList<>();
+     private final MovieRepository movieRepository;
+
+//    public List<Movie> db = new ArrayList<>();
+
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
 
     public List<Movie> getAllMovies() {
-        return db;
+        return movieRepository.findAll();
     }
 
     public Movie getMovieById(Long id) {
-
-        Optional<Movie> movie = db.stream().filter(m -> m.getId().equals(id)).findFirst();
-        return movie.orElse(null);
+        Optional<Movie> result = movieRepository.findById(id);
+        return result.get();
     }
 
     public void saveMovie(Movie movie) {
 
-        OptionalLong maxId = db.stream().mapToLong(Movie::getId).max();
-        if (maxId.isPresent())
-            movie.setId(maxId.getAsLong() + 1);
-        else
-            movie.setId(1L);
-        db.add(movie);
+        movieRepository.save(movie);
     }
 
     public Movie updateMovie(Long id, Movie movie) {
@@ -39,13 +40,14 @@ public class MovieService {
             result.setName(movie.getName());
             result.setCategory(movie.getCategory());
         }
+        movieRepository.save(result);
         return result;
     }
 
-    public Movie deleteMovie(Long id) {
-        Movie movie = getMovieById(id);
-        if (movie != null)
-            db.remove(movie);
-        return movie;
+    public Boolean deleteMovie(Long id) {
+        Boolean result = movieRepository.existsById(id);
+        if (result)
+            movieRepository.deleteById(id);
+        return result;
     }
 }

@@ -54,10 +54,9 @@ public class MovieServiceRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
-        Movie result = movieService.deleteMovie(id);
-        if (result == null)
-            return ResponseEntity.notFound().build();
-        else
+        if (movieService.deleteMovie(id))
             return ResponseEntity.ok().build();
+        else
+            return ResponseEntity.notFound().build();
     }
 }
