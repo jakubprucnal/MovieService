@@ -48,10 +48,12 @@ public class MovieService {
     }
 
     public void returnMovie(Long id) {
+
         movieRepository.updateMovieAvailability(true, id);
     }
 
     public void rentMovie(Long id) {
+
         movieRepository.updateMovieAvailability(false, id);
     }
 }

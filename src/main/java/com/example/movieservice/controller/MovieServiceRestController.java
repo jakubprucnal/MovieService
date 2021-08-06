@@ -4,6 +4,7 @@ import com.example.movieservice.model.Movie;
 import com.example.movieservice.service.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 
@@ -70,5 +71,10 @@ public class MovieServiceRestController {
     public ResponseEntity<Void> rentMovie(@PathVariable Long id){
         movieService.rentMovie(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/exception")
+    public ResponseEntity<Void> getException(){
+        throw new RuntimeException("sfdafew");
     }
 }
